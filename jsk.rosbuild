@@ -141,9 +141,9 @@ function install-pkg {
     retry=0
     while [ $success == 0 -a $retry -lt 10 ]; do
         if ( [[ "$DISTRIBUTION" =~ (electric|fuerte|groovy) ]] ) then
-            (cd $ROS_INSTALLDIR_SRC && ROS_WORKSPACE="" rosws update ) && success=1 || sleep 120
+            (cd $ROS_INSTALLDIR_SRC && ROS_WORKSPACE="" rosws update --parallel=1000 ) && success=1 || sleep 120
         else
-            (cd $ROS_INSTALLDIR_SRC && ROS_WORKSPACE="" wstool update ) && success=1 || sleep 120
+            (cd $ROS_INSTALLDIR_SRC && ROS_WORKSPACE="" wstool update --parallel=1000 ) && success=1 || sleep 120
         fi
         retry=`expr $retry + 1`
     done
